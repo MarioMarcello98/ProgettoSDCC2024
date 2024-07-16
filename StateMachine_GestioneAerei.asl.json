@@ -1,0 +1,80 @@
+{
+  "Comment": "Saga orchestration",
+  "StartAt": "Login",
+  "States": {
+    "Login": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:787560056715:function:Login",
+      "Next": "CheckLogin"
+    },
+    "CheckLogin": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.message",
+          "StringEquals": "Ops! Qualcosa non ha funzionato",
+          "Next": "EndHandler"
+        }
+      ],
+      "Default": "Reservation"
+    },
+    "Reservation": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:787560056715:function:Reservation",
+      "Next": "CheckReservation"
+    },
+    "CheckReservation": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.Message",
+          "StringEquals": "ok",
+          "Next": "Payment"
+        }
+      ],
+      "Default": "EndHandler"
+    },
+    "Payment": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:787560056715:function:Payment",
+      "Next": "CheckPayment"
+    },
+    "CheckPayment": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.Message",
+          "StringEquals": "Pagamento completato.",
+          "Next": "Confirm"
+        }
+      ],
+      "Default": "EndHandler"
+    },
+    "Confirm": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:787560056715:function:Confirm",
+      "Next": "CheckConfirm"
+    },
+    "CheckConfirm": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.Message",
+          "StringEquals": "Prenotazione confermata. Buon Viaggio!",
+          "Next": "EndHandler"
+        }
+      ],
+      "Default": "CompPayment"
+    },
+    "CompPayment": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:787560056715:function:CompPayment",
+      "End": true
+    },
+    "EndHandler": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:787560056715:function:EndHandler",
+      "End": true
+    }
+  }
+}
