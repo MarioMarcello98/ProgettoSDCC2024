@@ -1,0 +1,103 @@
+﻿STEP 1: Input che daranno esito positivo
+* Utente già registrato
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Amsterdam”,
+   “Posti”: 2,
+   “Ricarica”: 100
+   }
+
+* Utente non registrato
+{
+   “ID”: ”BRW70”,
+   “Nome”: “Steve”, 
+   ”Cognome”: “Vai”, 
+   “Destinazione”:“Parigi”,
+   “Posti”: 2,
+   “Ricarica”: 700
+   }
+   
+STEP 2: Input che simulano errori utente
+* Output: “Bisogna selezionare almeno un posto”
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Amsterdam”,
+   “Posti”: 0,
+   “Ricarica”: 100
+   }
+
+* Output: “Non voliamo ancora verso Tokyo”
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Tokyo”,
+   “Posti”: 2,
+   “Ricarica”: 100
+   }
+
+STEP 3: Input che simulano errori dovuti alla mancanza di risorse
+* Output: “Non ci sono abbastanza posti disponibili”
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Amsterdam”,
+   “Posti”: 1000,
+   “Ricarica”: 100
+   }
+
+* Output: “Saldo Insufficiente”
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Madrid”,
+   “Posti”: 30,
+   “Ricarica”: 0
+   }
+
+STEP 4: Esecuzioni concorrenti
+* Output: entrambi le esecuzioni vanno a buon fine
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Madrid”,
+   “Posti”: 3,
+   “Ricarica”: 0
+   }
+
+{
+   “ID”: ”ABCD1”,
+   “Nome”: “Roger”, 
+   ”Cognome”: “Waters”, 
+   “Destinazione”: “Madrid”,
+   “Posti”: 3,
+   “Ricarica”: 400
+   }
+
+
+* Output: Una esecuzione andrà a buon fine mentre l’altra fallirà innescando CompPayment
+{
+   “ID”: ”12345”,
+   “Nome”: “Mario”, 
+   ”Cognome”: “Marcello”, 
+   “Destinazione”: “Istanbul”,
+   “Posti”: 2,
+   “Ricarica”: 200
+   }
+
+{
+   “ID”: ”ABCD1”,
+   “Nome”: “Roger”, 
+   ”Cognome”: “Waters”, 
+   “Destinazione”: “Istanbul”,
+   “Posti”: 2,
+   “Ricarica”: 200
+   }
+
