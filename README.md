@@ -1,7 +1,7 @@
 Step 1:
 La cartella my-lambda-function contiene sei cartelle ognuna dedicata ad una funzione. 
-In queste cartelle sono presente sia i codici sorgente delle singole funzione che le versioni compresse.
-Creare su AWS Lambda sei funzioni e caricare in ognuna di esse un file .zip della relativa funzione.
+In queste cartelle sono presente sia i codici sorgente delle singole funzioni che le loro versioni compresse.
+Creare su AWS Lambda sei funzioni e caricare in ognuna di esse il file .zip della relativa funzione.
 (Importante non modificare i nomi delle funzioni).
 
 Step 2:
